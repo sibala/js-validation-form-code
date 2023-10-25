@@ -68,15 +68,21 @@ function inputRequiredErrorMessage(input, fieldName) {
   
   return "";
 }
-
-let selectBirthYearHTML = "";
-for (let year = 2023; year >= 1923; year--) {
-  if (year == 1990) {
-    selectBirthYearHTML += `<option selected>${year}</option>`
-  } else {
-    selectBirthYearHTML += `<option>${year}</option>`
+function selectBirthYearSelectHTML(startYear, endYear, defaultYear) {
+  let selectBirthYearHTML = "";
+  for (let year = startYear; year >= endYear; year--) {
+    if (year == defaultYear) {
+      selectBirthYearHTML += `<option selected>${year}</option>`
+    } else {
+      selectBirthYearHTML += `<option>${year}</option>`
+    }
   }
+
+  return selectBirthYearHTML;
 }
+
+let startYear = new Date().getFullYear()
+let endYear = startYear - 100;
 // console.log(selectBirthYearHTML);
-document.getElementById('selectBirthYear').innerHTML = selectBirthYearHTML;
+document.getElementById('selectBirthYear').innerHTML = selectBirthYearSelectHTML(startYear, endYear, 1995);
 
