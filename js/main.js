@@ -14,25 +14,34 @@ registerForm.addEventListener('submit', function(e) {
   console.log(inputEmail.value);
 
   let errorMessages = ""
-  if (inputEmail.value == "") {
-    errorMessages += 'Email is required<br>';
-  } 
-  if (inputPassword.value == "") {
-    errorMessages += 'Password is required<br>';
-  } else if (inputPassword.value.length < 6 || inputPassword.value.length > 10) {
+  errorMessages += inputRequiredErrorMessage(inputEmail, 'Email')
+  errorMessages += inputRequiredErrorMessage(inputPassword, 'Password')
+  errorMessages += inputRequiredErrorMessage(inputAddress, 'Address')
+  errorMessages += inputRequiredErrorMessage(inputAddress2, 'Second address')
+  errorMessages += inputRequiredErrorMessage(inputCity, 'City')
+  errorMessages += inputRequiredErrorMessage(inputZip, 'Zip code')
+  // if (inputEmail.value == "") {
+  //   errorMessages += 'Email is required<br>';
+  // } 
+  // if (inputPassword.value == "") {
+  //   errorMessages += 'Password is required<br>';
+  // }
+  // if (inputAddress.value == "") {
+  //   errorMessages += 'Address is required<br>';
+  // }
+  // if (inputAddress2.value == "") {
+  //   errorMessages += 'Second Address is required<br>';
+  // }
+  // if (inputCity.value == "") {
+  //   errorMessages += 'City is required<br>';
+  // }
+  // if (inputZip.value == "") {
+  //   errorMessages += 'Zip is required<br>';
+  // }
+
+
+  if (inputPassword.value.length < 6 || inputPassword.value.length > 10) {
     errorMessages += 'Password must be between 6-10 chars<br>';
-  }
-  if (inputAddress.value == "") {
-    errorMessages += 'Address is required<br>';
-  }
-  if (inputAddress2.value == "") {
-    errorMessages += 'Second Address is required<br>';
-  }
-  if (inputCity.value == "") {
-    errorMessages += 'City is required<br>';
-  }
-  if (inputZip.value == "") {
-    errorMessages += 'Zip is required<br>';
   }
   
   let formMessages = document.getElementById('form-messages');
@@ -48,6 +57,17 @@ registerForm.addEventListener('submit', function(e) {
       '</div>';
   }
 })
+
+function inputRequiredErrorMessage(input, fieldName) {
+  // Normally this would be an if/else-statement.
+  // But because return-statement jumps out of the function, 
+  // this code would suffice
+  if (input.value == "") {
+    return fieldName + ' is required<br>';
+  }
+  
+  return "";
+}
 
 let selectBirthYearHTML = "";
 for (let year = 2023; year >= 1923; year--) {
